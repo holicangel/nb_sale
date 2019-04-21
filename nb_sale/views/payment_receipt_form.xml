@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List View -->
+
+        
+        <!-- Form View -->
+        <record model="ir.ui.view" id="payment_receipt_form">
+            <field name="name">account.invoice.form</field>
+            <field name="model">payment.receipt.nb</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="no_kwitansi"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="payment_receipt_action">
+            <field name="name">Payment Receipt</field>
+            <field name="res_model">payment.receipt.nb</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+        </record>
+<!-- 
+        <menuitem 
+            id="main_payment_receipt" 
+            name="Payment Receipt" 
+            action="payment_receipt_action" 
+        /> -->
+
+
+    </data>
+</odoo>

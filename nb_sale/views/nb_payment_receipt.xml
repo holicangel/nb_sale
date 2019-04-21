@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <template id="nb_paymentreceipt_template">
+            <t t-call="report.external_layout">
+                <t t-set="o" t-value="docs.with_context({'lang':docs.partner_id.lang})"/>   
+                                                                         
+                    <div class="page" style="font-size:17px;">
+                   
+                    <div class="row">
+                 <table><tr> <td> <strong>No. Kwitansi</strong> </td><td width="50px"></td><td>: <span t-field="o.nomor_kwitansi"/></td>
+                  </tr>
+                 <tr> <td> <strong> No. Purchase Order</strong></td><td width="50px"></td><td>: <span t-field="o.name"/></td> </tr>
+                   </table> 
+                    </div>
+                        
+                        
+                        <center><h1><strong>
+                            <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">KWITANSI</span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORM</span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">KWITANSI</span>
+                            <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                            <span t-if="o.type == 'out_refund'">Refund</span>
+                            <span t-if="o.type == 'in_refund'">Vendor Refund</span>
+                            <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                            <!-- <span t-field="o.number"/> -->
+                            
+                        </strong></h1></center>
+                        <br/>
+                        <br/>
+                        <br/>
+                        
+                     <div class="row"><table><tr><td>
+                    <strong><u> Terima Dari</u><br/> Received From</strong> </td><td width="50px"></td><td>: <span t-field="o.partner_id"/></td> </tr>
+                    <tr height="50px"><td></td><td></td><td></td></tr>
+                    <tr>
+                    <td> <strong><u>Rupiah</u><br/>US $ </strong></td>
+                    <td width="50px"></td>
+                    <td>: <span t-field="o.residual" /></td>
+                    </tr>
+                     <tr height="50px"><td></td><td></td><td></td></tr>
+                      <tr><td>
+                      <strong><u>Sebesar</u><br/>The Sum Of</strong></td><td width="50px">
+                      </td>
+                      <td>: <span t-field="o.terbilang"/></td>
+                      </tr>
+                      <tr height="50px"><td></td><td></td><td></td></tr>
+                      <tr><td>
+                      <strong><u>Utk. Pembayaran</u><br/>In Payment Of</strong></td><td width="50px">
+                      </td>
+                      <td>: <span t-field="o.untuk"/></td>
+                      </tr>
+                      <tr height="50px"><td></td><td></td><td></td></tr>
+                        <tr><td>
+                      <strong>Cheque / BG</strong></td><td width="50px">
+                      </td>
+                      <td>: PT Nusatama Berkah Bank Permata Cab Kemang Pratama Bekasi <br/> &amp;nbsp;&amp;nbsp; No. ACC : IDR &amp;nbsp; 121 648 7865  </td>
+                      </tr>
+                    </table>
+                    <br/>
+                    <br/>
+                    <strong>Note :</strong><br/> Pembayaran dianggap sah/
+                    diakui apabila Cheque/BG telah dicairkan <br/>
+                    <i>Payment valid Cheque/BG realizeable by cash</i>
+                     </div>   
+                        
+                </div>
+            </t>
+        </template>
+        <report
+            id="paymentreceipt_hardcopy"
+            model="account.invoice"
+            string="NB Payment Receipt Bahasa Indonesia"
+            name="nb_sale.nb_paymentreceipt_template"
+            file="nb_sale.nb_paymentreceipt_template"
+            report_type="qweb-pdf"
+            menu ="True"
+            paperformat="paperformat"/> 
+        />
+    </data>
+</odoo>
